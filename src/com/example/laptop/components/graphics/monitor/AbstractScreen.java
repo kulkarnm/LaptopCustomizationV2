@@ -6,7 +6,7 @@ import com.example.laptop.components.BUDGETCATEGORY;
 import com.example.laptop.registry.AssemblyComponentRegistryRecord;
 import com.example.laptop.visitor.IVisitor;
 
-public abstract class AbstractScreen implements Screen{
+public abstract class AbstractScreen implements AssemblyComponent{
     private String componentIdentifier;
     private ASSEMBLYCOMPONENTTYPE type;
     private ASSEMBLYCOMPONENTTYPE family;
@@ -33,12 +33,7 @@ public abstract class AbstractScreen implements Screen{
     public double getCost() {
         return cost;
     }
-
     @Override
-    public ScreenSpecification getSpecification() {
-        return specification;
-    }
-
     public String getComponentIdentifier() {
         return componentIdentifier;
     }
@@ -60,6 +55,7 @@ public abstract class AbstractScreen implements Screen{
     @Override
     public AssemblyComponent findByComponentType(ASSEMBLYCOMPONENTTYPE ASSEMBLYCOMPONENTTYPE){ return null;}
 
+
     @Override
     public String toString() {
         return componentIdentifier +"{" +
@@ -70,4 +66,6 @@ public abstract class AbstractScreen implements Screen{
                 ", specification=" + specification +
                 '}';
     }
+
+
 }

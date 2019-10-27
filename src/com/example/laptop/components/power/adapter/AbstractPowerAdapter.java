@@ -6,7 +6,7 @@ import com.example.laptop.components.BUDGETCATEGORY;
 import com.example.laptop.registry.AssemblyComponentRegistryRecord;
 import com.example.laptop.visitor.IVisitor;
 
-public abstract class AbstractPowerAdapter implements PowerAdapter {
+public abstract class AbstractPowerAdapter implements AssemblyComponent {
     private String componentIdentifier;
     private ASSEMBLYCOMPONENTTYPE type;
     private ASSEMBLYCOMPONENTTYPE family;
@@ -22,11 +22,6 @@ public abstract class AbstractPowerAdapter implements PowerAdapter {
         this.specification = specification;
         this.family = family;
         this.registerComponent(new AssemblyComponentRegistryRecord(type,budgetcategory,componentIdentifier,family));
-    }
-
-    @Override
-    public AdapterSpecification getSpecification() {
-        return specification;
     }
 
     @Override

@@ -6,7 +6,7 @@ import com.example.laptop.components.BUDGETCATEGORY;
 import com.example.laptop.registry.AssemblyComponentRegistryRecord;
 import com.example.laptop.visitor.IVisitor;
 
-public abstract class AbstractCPU implements CPU {
+public abstract class AbstractCPU implements AssemblyComponent {
     private String componentIdentifier;
     private ASSEMBLYCOMPONENTTYPE type;
     private ASSEMBLYCOMPONENTTYPE family;
@@ -32,11 +32,6 @@ public abstract class AbstractCPU implements CPU {
     @Override
     public double getCost() {
         return cost;
-    }
-
-    @Override
-    public CPUSpecification getSpecification() {
-        return specification;
     }
 
     public void accept(IVisitor visitor){

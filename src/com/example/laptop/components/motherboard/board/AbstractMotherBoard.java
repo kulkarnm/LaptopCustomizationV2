@@ -6,7 +6,7 @@ import com.example.laptop.components.BUDGETCATEGORY;
 import com.example.laptop.registry.AssemblyComponentRegistryRecord;
 import com.example.laptop.visitor.IVisitor;
 
-public abstract class AbstractMotherBoard implements MainMotherboard {
+public abstract class AbstractMotherBoard implements AssemblyComponent {
     private String componentIdentifier;
     private ASSEMBLYCOMPONENTTYPE type;
     private ASSEMBLYCOMPONENTTYPE family;
@@ -36,10 +36,6 @@ public abstract class AbstractMotherBoard implements MainMotherboard {
     @Override
     public void accept(IVisitor visitor) {
         visitor.visit(this);
-    }
-
-    public MotherboardSpecification getSpecification() {
-        return specification;
     }
 
     public String getComponentIdentifier() {

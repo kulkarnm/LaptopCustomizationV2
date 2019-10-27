@@ -6,7 +6,7 @@ import com.example.laptop.components.BUDGETCATEGORY;
 import com.example.laptop.registry.AssemblyComponentRegistryRecord;
 import com.example.laptop.visitor.IVisitor;
 
-public abstract class AbstractGraphicsCard implements GraphicsCard {
+public abstract class AbstractGraphicsCard implements AssemblyComponent {
     private String componentIdentifier;
     protected ASSEMBLYCOMPONENTTYPE type;
     private ASSEMBLYCOMPONENTTYPE family;
@@ -23,12 +23,6 @@ public abstract class AbstractGraphicsCard implements GraphicsCard {
         this.family = family;
         this.registerComponent(new AssemblyComponentRegistryRecord(type,budgetcategory,componentIdentifier,family));
     }
-
-    @Override
-    public GraphicsSpecification getSpecification() {
-        return specification;
-    }
-
 
     @Override
     public ASSEMBLYCOMPONENTTYPE getType() {
