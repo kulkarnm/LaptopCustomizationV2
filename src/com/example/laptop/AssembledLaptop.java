@@ -6,6 +6,8 @@ import com.example.laptop.components.AssemblyComponent;
 import com.example.laptop.components.BUDGETCATEGORY;
 import com.example.laptop.components.selector.factory.AssemblyComponentsSelectorFactory;
 import com.example.laptop.components.upgrade.*;
+import com.example.laptop.decorators.PostTestDecorator;
+import com.example.laptop.decorators.PreTestDecorator;
 import com.example.laptop.inventory.ComponentInventory;
 import com.example.laptop.selection.criteria.AssemblyTypeSelectorFactory;
 import com.example.laptop.selection.criteria.PURPOSE;
@@ -24,19 +26,29 @@ public class AssembledLaptop {
         AssemblyComponent laptopAssembly = assembler.buildAssembly(assemblyComponentsSelectorFactory);
         SpecificationPrinter visitor= new SpecificationPrinter();
         laptopAssembly.accept(visitor);
-        System.out.println("############## Printing proposed assembly#############");
+        System.out.println("############## Printing specifications of proposed assembly #############");
         visitor.print();
+        System.out.println("=====================================================================================================");
 
-        System.out.println("##########Assembly upgradation for Intel I5####################");
+        System.out.println("##########Assembly modification as per customer request####################");
         UpgraderChain chain = new UpgraderChain();
         UpgradeRequest request = new UpgradeRequest("IntelI5Motherboard", ASSEMBLYCOMPONENTTYPE.MOTHERBOARD);
         laptopAssembly = chain.upgrade(request,laptopAssembly);
-        System.out.println("################Assembly get modified for Intel I7 and compatible components############");
+        System.out.println("################Assembly modified as per customer request############");
+        System.out.println("=====================================================================================================");
+
+        System.out.println("################Printing Specification of modified assembly ############");
         SpecificationPrinter visitor2= new SpecificationPrinter();
         laptopAssembly.accept(visitor2);
-        System.out.println("############## Printing modified assembly#############");
         visitor2.print();
-        assembler.assemble(laptopAssembly);
+        System.out.println("############## Printing of modified assembly specifications completed#############");
+        System.out.println("=====================================================================================================");
+
+
+        PostTestDecorator priorTestingHarness = new PostTestDecorator(laptopAssembly);
+        //assembler.assemble(laptopAssembly);
+        assembler.assemble(priorTestingHarness);
+        System.out.println("=====================================================================================================");
     }
 
     public static void main(String[] args){
