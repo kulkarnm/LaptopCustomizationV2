@@ -1,20 +1,21 @@
 package com.example.laptop.decorators;
 
 import com.example.laptop.components.AssemblyComponent;
+import com.example.laptop.visitor.IVisitable;
+import com.example.laptop.visitor.IVisitor;
 
-public class PreTestDecorator extends AssemblyComponentBaseDecorator {
-    public PreTestDecorator(AssemblyComponent wrappyComponent) {
-        super(wrappyComponent);
-    }
+public class PreTestDecorator implements IVisitor {
 
     @Override
-    public void assemble() {
-        AssemblyComponentVerifier verifier = VerifierStaticFactory.createVerifier(wrappyComponent);
-        boolean  testPassed = verifier.qualityCheck(wrappyComponent);
-        if(testPassed) {
-            super.assemble();
-        }else{
-            throw new RuntimeException("Quality Check Failed : " + wrappyComponent.getComponentIdentifier());
+    public void visit(IVisitable visitable) {
+        AssemblyComponentVerifier verifier = VerifierStaticFactory.createVerifier((AssemblyComponent)visitable);
+        if(null != verifier) {
+            boolean testPassed = verifier.qualityCheck((AssemblyComponent) visitable);
+            if (testPassed) {
+//            super.assemble();
+            } else {
+                throw new RuntimeException("Quality Check Failed : " + ((AssemblyComponent) visitable).getComponentIdentifier());
+            }
         }
     }
-} 
+}

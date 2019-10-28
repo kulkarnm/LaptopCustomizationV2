@@ -12,6 +12,7 @@ import com.example.laptop.inventory.ComponentInventory;
 import com.example.laptop.selection.criteria.AssemblyTypeSelectorFactory;
 import com.example.laptop.selection.criteria.PURPOSE;
 import com.example.laptop.print.SpecificationPrinter;
+import com.example.laptop.visitor.IVisitor;
 
 public class AssembledLaptop {
     public static ComponentInventory registerAssemblyComponents(){
@@ -20,7 +21,7 @@ public class AssembledLaptop {
         return componentInventory;
     }
     public void assembleLaptop() {
-        System.out.println("############## Assembly selection for business Purpose#################");
+        System.out.println("############## Assembly selection #################");
         AssemblyComponentsSelectorFactory assemblyComponentsSelectorFactory = AssemblyTypeSelectorFactory.chooseAppropriateAssemblySelection(PURPOSE.BUSINESS,BUDGETCATEGORY.LOW);
         AggregateAssembler assembler = new AggregateAssembler();
         AssemblyComponent laptopAssembly = assembler.buildAssembly(assemblyComponentsSelectorFactory);
@@ -45,8 +46,15 @@ public class AssembledLaptop {
         System.out.println("=====================================================================================================");
 
 
-        PostTestDecorator priorTestingHarness = new PostTestDecorator(laptopAssembly);
+
         //assembler.assemble(laptopAssembly);
+        System.out.println("############## Testing initiated for assembly components#############");
+        IVisitor preTestDecorator = new PreTestDecorator();
+        laptopAssembly.accept(preTestDecorator);
+        System.out.println("############## Testing completed for assembly components#############");
+        System.out.println("=====================================================================================================");
+
+        PostTestDecorator priorTestingHarness = new PostTestDecorator(laptopAssembly);
         assembler.assemble(priorTestingHarness);
         System.out.println("=====================================================================================================");
     }
