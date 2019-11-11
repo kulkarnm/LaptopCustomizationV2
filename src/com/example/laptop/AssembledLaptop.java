@@ -21,12 +21,14 @@ public class AssembledLaptop {
         return componentInventory;
     }
     public void assembleLaptop() {
+        System.out.println("=====================================================================================================");
         System.out.println("############## Assembly selection #################");
         AssemblyComponentsSelectorFactory assemblyComponentsSelectorFactory = AssemblyTypeSelectorFactory.chooseAppropriateAssemblySelection(PURPOSE.BUSINESS,BUDGETCATEGORY.LOW);
         AggregateAssembler assembler = new AggregateAssembler();
         AssemblyComponent laptopAssembly = assembler.buildAssembly(assemblyComponentsSelectorFactory);
         SpecificationPrinter visitor= new SpecificationPrinter();
         laptopAssembly.accept(visitor);
+        System.out.println("=====================================================================================================");
         System.out.println("############## Printing specifications of proposed assembly #############");
         visitor.print();
         System.out.println("=====================================================================================================");

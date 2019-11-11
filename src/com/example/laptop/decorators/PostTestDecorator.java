@@ -9,7 +9,7 @@ public class PostTestDecorator extends AssemblyComponentBaseDecorator {
 
     @Override
     public void assemble() {
-        AssemblyComponentVerifier verifier = new LaptopAssemblyPreTestVerifier();
+        AssemblyComponentVerifier verifier = new LaptopAssemblyPostTestVerifier();
         super.assemble();
         boolean testPassed = verifier.qualityCheck(wrappyComponent);
         if (!testPassed) {

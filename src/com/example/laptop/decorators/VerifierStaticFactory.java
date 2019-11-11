@@ -1,7 +1,7 @@
 package com.example.laptop.decorators;
 
 import com.example.laptop.components.AssemblyComponent;
-
+//static factory
 public class VerifierStaticFactory {
 
     public static AssemblyComponentVerifier createVerifier(AssemblyComponent wrappyComponent) {
